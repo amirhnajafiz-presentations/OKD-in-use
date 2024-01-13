@@ -1,1 +1,36 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: okd-in-use-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: okd-in-use-nginx-app
+  template:
+    metadata:
+      labels:
+        app: okd-in-use-nginx-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /etc/nginx
+              readOnly: true
+              name: nginx-conf
+            - mountPath: /var/log/nginx
+              name: log
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: okd-in-use-nginx-conf # place ConfigMap `nginx-conf` on /etc/nginx
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+              - key: virtualhost.conf
+                path: virtualhost/virtualhost.conf # dig directory
+        - name: log
+          emptyDir: {}
