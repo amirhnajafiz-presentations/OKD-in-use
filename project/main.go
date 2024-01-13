@@ -15,6 +15,10 @@ func page(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./web/index.html")
 }
 
+func views(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./web/main.css")
+}
+
 func statics(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./web/script.js")
 }
@@ -62,7 +66,9 @@ func main() {
 	mux.HandleFunc("/healthz", healthy)
 
 	mux.HandleFunc("/", page)
+	mux.HandleFunc("/views", views)
 	mux.HandleFunc("/statics", statics)
+
 	mux.HandleFunc("/api/resolve", handler)
 
 	log.Println(fmt.Sprintf("server started on %d ...", port))
