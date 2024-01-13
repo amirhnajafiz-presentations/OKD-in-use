@@ -11,5 +11,5 @@ type Config struct {
 }
 
 func (c Config) DNS() string {
-	return fmt.Sprintf("mysql://%s:%s@tcp(%s:%d)/%s", c.User, c.Password, c.Host, c.Port, c.Database)
+	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", c.User, c.Password, c.Host, c.Port, c.Database)
 }

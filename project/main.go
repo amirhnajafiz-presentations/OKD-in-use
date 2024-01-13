@@ -26,8 +26,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println(fmt.Sprintf("resolve request:\n\t%s", req.DNS()))
+
 	err := db.Database{}.Connect(*req)
 	if err != nil {
+		log.Println(fmt.Errorf("failed to connect to db: %w", err))
+
 		w.WriteHeader(http.StatusInternalServerError)
 
 		return

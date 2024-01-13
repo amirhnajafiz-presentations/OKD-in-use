@@ -96,11 +96,15 @@
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body)
-            }).then(_ => {
-                alert("Database resolved!");
+            }).then(res => {
+                if (res.status === 200) {
+                    alert("Database resolved!");
+                } else {
+                    alert("Could not connect to database!");
+                }
             }).catch(e => {
                 console.error(e);
-                alert("Could not find database!")
+                alert("Gateway server error!")
             })
         }
     </script>
