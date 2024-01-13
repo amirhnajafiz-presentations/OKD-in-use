@@ -9,6 +9,10 @@ import (
 	"github.com/amirhnajafiz-presentations/snapp-OKD-in-use/project/internal/db"
 )
 
+func page(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "/web/index.html")
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	req := new(db.Config)
 
