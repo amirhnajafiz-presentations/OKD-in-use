@@ -1,9 +1,11 @@
 package db
 
-func connect() {
+type Database struct{}
+
+func (d Database) Connect() {
 
 }
 
-func ping() {
+func (d Database) Ping() {
 
 }
