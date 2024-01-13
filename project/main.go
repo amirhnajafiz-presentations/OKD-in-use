@@ -15,6 +15,10 @@ func page(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./web/index.html")
 }
 
+func healthy(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	req := new(db.Config)
 
@@ -41,14 +45,22 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port, _ := strconv.Atoi(os.Getenv("HTTP_PORT"))
+	port, err := strconv.Atoi(os.Getenv("HTTP_PORT"))
+	if err != nil {
+		log.Println(fmt.Errorf("failed to read HTTP_PORT: %w", err))
+
+		port = 8080
+	}
 
 	mux := http.NewServeMux()
+
+	mux.HandleFunc("/readyz", healthy)
+	mux.HandleFunc("/healthz", healthy)
 
 	mux.HandleFunc("/", page)
 	mux.HandleFunc("/api/resolve", handler)
 
-	log.Println(fmt.Sprintf("app server started on %d ...", port))
+	log.Println(fmt.Sprintf("server started on %d ...", port))
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), mux); err != nil {
 		panic(err)
