@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 
 	"github.com/amirhnajafiz-presentations/snapp-OKD-in-use/project/internal/db"
 )
@@ -35,5 +37,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	port, _ := strconv.Atoi(os.Getenv("HTTP_PORT"))
 
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", page)
+	mux.HandleFunc("/api/resolve", handler)
+
+	log.Println(fmt.Sprintf("app server started on %d ...", port))
+
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), mux); err != nil {
+		panic(err)
+	}
 }
