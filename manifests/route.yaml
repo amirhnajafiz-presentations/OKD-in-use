@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: okd-in-use-nginx-route
+  namespace: snappline-app-staging
+spec:
+  host: okd-in-use-nginx.apps.private.okd4.teh-1.snappcloud.io
+  to:
+    kind: Service
+    name: okd-in-use-nginx-svc
+    weight: 100
+  port:
+    targetPort: 80
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
