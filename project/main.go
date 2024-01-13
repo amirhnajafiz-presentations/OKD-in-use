@@ -15,6 +15,10 @@ func page(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./web/index.html")
 }
 
+func statics(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./web/script.js")
+}
+
 func healthy(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
@@ -58,6 +62,7 @@ func main() {
 	mux.HandleFunc("/healthz", healthy)
 
 	mux.HandleFunc("/", page)
+	mux.HandleFunc("/statics", statics)
 	mux.HandleFunc("/api/resolve", handler)
 
 	log.Println(fmt.Sprintf("server started on %d ...", port))
