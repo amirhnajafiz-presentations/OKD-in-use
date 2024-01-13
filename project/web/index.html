@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Snapp OKD in use
+    </title>
+    <style>
+        body {
+            font-family: Tahoma,monospace;
+            background: #ffffff;
+        }
+
+        .container {
+            margin: 150px auto;
+            width: 50%;
+        }
+
+        .wrapper {
+            border-radius: 5px;
+            background: rgba(114, 194, 74, 0.3);
+            padding: 40px 40px;
+            display: grid;
+            grid-template-columns: 45% 45%;
+            grid-column-gap: 50px;
+            grid-row-gap: 25px;
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box > input {
+            padding: 5px 3px;
+            border-radius: 2px;
+            border: 0 solid black;
+            width: 60%;
+        }
+
+        .btn {
+            border: 0 solid black;
+            padding: 8px;
+            background: #09b05d;
+            color: white;
+            border-radius: 3px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>
+            MySQL Resolver
+        </h2>
+        <div class="wrapper">
+            <div class="box">
+                <label for="host">Host:</label>
+                <input type="text" id="host" />
+            </div>
+            <div class="box">
+                <label for="port">Port:</label>
+                <input type="text" id="port" />
+            </div>
+            <div class="box">
+                <label for="user">Username:</label>
+                <input type="text" id="user" />
+            </div>
+            <div class="box">
+                <label for="pass">Password:</label>
+                <input type="password" id="pass" />
+            </div>
+            <div class="box">
+                <label for="db">Database:</label>
+                <input type="text" id="db" />
+            </div>
+            <div class="box">
+                <button class="btn">
+                    Resolve
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
