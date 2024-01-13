@@ -12,7 +12,7 @@ import (
 )
 
 func page(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "/web/index.html")
+	http.ServeFile(w, r, "./web/index.html")
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
