@@ -10,4 +10,3 @@ spec:
       image: nginxinc/nginx-unprivileged:latest
       ports:
         - containerPort: 8080
-
