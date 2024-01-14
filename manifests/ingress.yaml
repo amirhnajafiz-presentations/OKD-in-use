@@ -7,7 +7,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: "okd-in-use-nginx.apps.private.okd4.teh-1.snappcloud.io"
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -15,4 +16,4 @@ spec:
               service:
                 name: okd-in-use-nginx-svc
                 port:
-                  number: 80
+                  number: 8080
