@@ -14,15 +14,21 @@ spec:
     spec:
       containers:
         - name: nginx-container
-          image: nginx:latest
+          image: nginxinc/nginx-unprivileged:latest
           ports:
             - containerPort: 8080
           volumeMounts:
-            - mountPath: /etc/nginx
-              readOnly: true
-              name: nginx-conf
             - mountPath: /var/log/nginx
               name: log
+          resources:
+            limits:
+              cpu: 20m
+              ephemeral-storage: 30Mi
+              memory: 25Mi
+            requests:
+              cpu: 6m
+              ephemeral-storage: 10Mi
+              memory: 25Mi
       volumes:
         - name: nginx-conf
           configMap:
