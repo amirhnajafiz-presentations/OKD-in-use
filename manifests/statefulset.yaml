@@ -16,6 +16,15 @@ spec:
       initContainers:
         - name: init-mysql
           image: mysql:5.7
+          resources:
+            limits:
+              cpu: 20m
+              ephemeral-storage: 30Mi
+              memory: 25Mi
+            requests:
+              cpu: 6m
+              ephemeral-storage: 10Mi
+              memory: 25Mi
           command:
             - bash
             - "-c"
@@ -40,6 +49,15 @@ spec:
               mountPath: /mnt/config-map
         - name: clone-mysql
           image: gcr.io/google-samples/xtrabackup:1.0
+          resources:
+            limits:
+              cpu: 20m
+              ephemeral-storage: 30Mi
+              memory: 25Mi
+            requests:
+              cpu: 6m
+              ephemeral-storage: 10Mi
+              memory: 25Mi
           command:
             - bash
             - "-c"
@@ -89,9 +107,14 @@ spec:
             - name: conf
               mountPath: /etc/mysql/conf.d
           resources:
+            limits:
+              cpu: 20m
+              ephemeral-storage: 30Mi
+              memory: 25Mi
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 6m
+              ephemeral-storage: 10Mi
+              memory: 25Mi
           livenessProbe:
             exec:
               command: ["mysqladmin", "-uroot", "-p$MYSQL_ROOT_PASSWORD", "ping"]
@@ -171,8 +194,8 @@ spec:
               mountPath: /etc/mysql/conf.d
           resources:
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: 10m
+              memory: 10Mi
       volumes:
         - name: conf
           emptyDir: {}
@@ -185,4 +208,4 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 100Mi
+            storage: 10Mi
