@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: okd-in-use-project-svc
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 9091

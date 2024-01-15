@@ -16,4 +16,4 @@ spec:
               service:
                 name: okd-in-use-project-svc
                 port:
-                  number: 9091
+                  number: 80
