@@ -23,3 +23,20 @@ Or you can just open the default address on your browser to use the UI panel.
 
 The only environment variable for this project is __HTTP_PORT__, which is the port of our service.
 The value should be a number between 1 and 23456.
+
+## Tagging
+
+In order to send this image to OKD image registry you need to login to the cluster with your
+credentials.
+
+```shell
+docker login -u <okd4-user> -p <okd4-token> <registery>/<namespace>
+```
+
+In our case we have ```image-registry.apps.private.okd4.teh-1.snappcloud.io/snappline-app-staging```.
+
+Then tag your image like this:
+
+```shell
+docker tag amirhossein21/okd-in-use-project:v0.1.0 image-registry.apps.private.okd4.teh-1.snappcloud.io/snappline-app-staging/okd-in-use-project:v0.1.0
+```

@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: okd-in-use-pod-example
   labels:
-    app: okd-in-use-pod-nginx
+    app: okd-in-use-nginx-app
 spec:
   containers:
     - name: nginx-container
