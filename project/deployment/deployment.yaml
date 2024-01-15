@@ -1,1 +1,42 @@
-# image = image-registry.openshift-image-registry.svc:5000/snappline-app-staging/okd-in-use-project
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: okd-in-use-project-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: okd-in-use-project-app
+  template:
+    metadata:
+      labels:
+        app: okd-in-use-project-app
+    spec:
+      containers:
+        - name: app-container
+          image: image-registry.openshift-image-registry.svc:5000/snappline-app-staging/okd-in-use-project:v0.1.0
+          ports:
+            - containerPort: 9091
+          env:
+            - name: HTTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: okd-in-use-project-config
+                  key: default.port
+          resources:
+            limits:
+              cpu: 20m
+              ephemeral-storage: 30Mi
+              memory: 25Mi
+            requests:
+              cpu: 6m
+              ephemeral-storage: 10Mi
+              memory: 25Mi
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 9091
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9091
