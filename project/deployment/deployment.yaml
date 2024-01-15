@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app-container
-          image: image-registry.openshift-image-registry.svc:5000/snappline-app-staging/okd-in-use-project:v0.1.0
+          image: amirhossein21/okd-in-use-project:v0.1.0
           ports:
             - containerPort: 9091
           env:
