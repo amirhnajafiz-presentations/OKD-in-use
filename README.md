@@ -1,6 +1,6 @@
-# Snapp! OKD in use
+# OKD in use
 
-Openshift (aka OKD) in use presentation at Snapp!
+Openshift (aka OKD) in use presentation.
 
 ## Resources
 
